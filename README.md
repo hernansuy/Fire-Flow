@@ -1,4 +1,4 @@
-# fire flow
+# Fire-Flow
 
 `fire flow` es una aplicación web local-first para registrar y organizar gastos personales a partir de tickets, facturas y comprobantes.
 
