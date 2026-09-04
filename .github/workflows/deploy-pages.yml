@@ -33,7 +33,7 @@ jobs:
       - name: Build static site
         run: npm run build
       - name: Include browser OCR module
-        run: cp paddle-ocr.js dist/paddle-ocr.js
+        run: cp app.js dist/app.js && cp paddle-ocr.js dist/paddle-ocr.js && cp service-worker.js dist/service-worker.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static files
