@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#102a56" />
+  <meta name="description" content="Contabilidad personal local-first" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>fire flow — Contabilidad personal</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark" aria-label="fire flow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.7 2.3c.3 3.1-1.7 4.5-3.1 6.5-1.1 1.5-1.4 3.1-.8 4.7.4-1.3 1.2-2.2 2.4-2.9-.2 2.2 1.8 2.8 1.8 5.1 0 1-.4 1.9-1.1 2.6 2.5-.5 4.4-2.3 4.7-4.9.3-2.4-.9-4.3-3-6.1.1 1.8-.2 2.6-.8 3.3-.4-2.6 1.2-4.8-.1-8.3Z"/></svg></span><span>fire flow</span><span class="brand-local">local</span></div>
+      <nav class="nav" aria-label="Navegación principal">
+        <button class="nav-item active" data-view="overview"><span>⌂</span> Resumen</button>
+        <button class="nav-item" data-view="months"><span>◫</span> Meses</button>
+        <button class="nav-item" data-view="expenses"><span>☷</span> Gastos <b id="nav-count">0</b></button>
+        <button class="nav-item" data-view="review"><span>◌</span> Revisar <b id="review-count">0</b></button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Configuración</button>
+      </nav>
+      <div class="sidebar-foot"><span class="offline-dot"></span><span>Solo en este dispositivo</span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow" id="today-label">SEPTIEMBRE 2026</p><h1 id="page-title">Resumen</h1></div>
+        <div class="top-actions"><span class="save-state" id="save-state">● Guardado local</span><button class="button primary" id="open-capture">+ Nuevo gasto</button></div>
+      </header>
+
+      <section id="overview-view" class="view active-view">
+        <div class="hero-row"><div><h2>Tu mes, bajo control.</h2><p class="muted">Captura un comprobante y deja que el resto sea revisión.</p></div><div class="month-picker"><button id="prev-month">←</button><strong id="month-name">Septiembre 2026</strong><button id="next-month">→</button><button class="button secondary month-manage" data-view="months">Gestionar mes</button></div></div>
+        <div class="metric-grid">
+          <article class="metric-card dark"><span>Total del mes</span><strong id="metric-total">$0.00</strong><small id="metric-original">0 gastos registrados</small><i class="metric-spark">╱╲╱╲</i></article>
+          <article class="metric-card"><span>Por revisar</span><strong id="metric-review">0</strong><small>comprobantes pendientes</small><i class="metric-icon amber">◌</i></article>
+          <article class="metric-card"><span>Comprobantes</span><strong id="metric-files">0</strong><small>archivos guardados localmente</small><i class="metric-icon">▧</i></article>
+        </div>
+        <div class="content-grid"><section class="panel recent-panel"><div class="panel-heading"><div><span class="section-kicker">ACTIVIDAD</span><h3>Gastos recientes</h3></div><button class="text-button" data-view="expenses">Ver todos →</button></div><div id="recent-list" class="expense-list"></div></section><section class="panel capture-card"><div class="capture-orbit">+</div><span class="section-kicker">CAPTURA RÁPIDA</span><h3>¿Tienes un ticket?</h3><p>Elige cómo quieres añadirlo. El OCR ocurre en tu navegador.</p><div class="quick-actions"><button class="button dark-button" id="quick-camera">⌾ Cámara</button><button class="button secondary" id="quick-upload">↑ Subir archivo</button></div><div class="capture-note">JPG, PNG o PDF · tus archivos no salen de aquí</div></section></div>
+      </section>
+
+      <section id="months-view" class="view"><div class="review-intro"><span class="section-kicker">ORGANIZACIÓN</span><h2>Primero, crea tu mes.</h2><p class="muted">Cada gasto pertenece a un mes y recibe su numeración dentro de él.</p></div><section class="panel months-panel"><div class="month-create"><div><h3>Nuevo mes</h3><p class="muted">Abre un periodo para empezar a registrar gastos.</p></div><div class="month-create-controls"><input id="new-month" type="month" /><button class="button primary" id="create-month">Crear mes</button></div></div><div class="month-list" id="month-list"></div></section></section>
+
+      <section id="expenses-view" class="view"><div class="toolbar"><div class="filters"><input id="search-input" class="search" placeholder="⌕  Buscar comercio o ID" /><select id="category-filter"><option value="">Todas las categorías</option><option>Comida</option><option>Transporte</option><option>Oficina</option><option>Salud</option><option>Otros</option></select><select id="status-filter"><option value="">Todos los estados</option><option value="review">Por revisar</option><option value="confirmed">Confirmado</option></select></div><button class="button secondary" id="export-excel">Exportar Excel ↓</button></div><section class="panel table-panel"><div class="table-heading"><div><span class="section-kicker">REGISTRO MENSUAL</span><h3>Todos los gastos</h3></div><span id="table-count" class="count-pill">0 registros</span></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Comercio</th><th>Fecha</th><th>Categoría</th><th>Original</th><th>Total USD</th><th>Estado</th><th></th></tr></thead><tbody id="expense-table"></tbody></table></div></section></section>
+
+      <section id="review-view" class="view"><div class="review-intro"><span class="section-kicker">BANDEJA DE REVISIÓN</span><h2>Un último vistazo.</h2><p class="muted">Confirma los campos que el OCR no pudo leer con seguridad.</p></div><div id="review-list" class="review-list"></div></section>
+      <section id="settings-view" class="view"><div class="review-intro"><span class="section-kicker">PREFERENCIAS</span><h2>Configuración local.</h2><p class="muted">Estas preferencias se guardan únicamente en este dispositivo.</p></div><section class="panel settings-panel"><label>Moneda base<select id="base-currency"><option>EUR</option><option>USD</option><option>GBP</option><option>MXN</option><option>ARS</option></select></label><label>Tipo de cambio USD <span class="field-help">1 unidad de moneda base =</span><input id="usd-rate" type="number" step="0.0001" min="0" /></label><div class="settings-actions"><button class="button secondary" id="import-project">Importar proyecto</button><button class="button primary" id="export-project">Exportar proyecto</button><input type="file" id="project-file" accept=".ledger,.json" hidden /></div></section></section>
+    </main>
+  </div>
+
+<dialog id="capture-dialog" class="capture-dialog"><form method="dialog" id="capture-form"><div class="dialog-head"><div><span class="section-kicker">NUEVO GASTO</span><h2>Captura un comprobante</h2></div><button class="icon-button" value="cancel" aria-label="Cerrar">×</button></div><div id="drop-zone" class="drop-zone"><div class="upload-icon">↑</div><strong>Arrastra un archivo aquí</strong><span>o elige una opción</span><div class="upload-actions"><label class="button secondary">Usar cámara<input id="camera-input" type="file" accept="image/*" capture="environment" hidden /></label><label class="button secondary">Subir archivo<input id="file-input" type="file" accept="image/*,.pdf,application/pdf" hidden /></label></div><small>El archivo se conserva con el ID del gasto.</small></div><div id="ocr-status" class="ocr-status hidden"></div><div id="capture-fields" class="capture-fields hidden"><div class="field-row"><label>Comercio<input id="merchant" required placeholder="Ej. Mercadona" /></label><label>Fecha<input id="expense-date" required type="date" /></label></div><div class="field-row"><label>Total original<input id="amount" required type="number" step="0.01" placeholder="0.00" /></label><label>Moneda<select id="currency"><option>EUR</option><option>USD</option><option>GBP</option><option>MXN</option><option>ARS</option></select></label></div><div class="field-row"><label>Categoría<select id="category"><option>Comida</option><option>Transporte</option><option>Oficina</option><option>Salud</option><option>Otros</option></select></label><label>Tipo de cambio<input id="exchange-rate" required type="number" step="0.0001" value="1" /></label></div><label>Notas<textarea id="notes" rows="2" placeholder="Opcional"></textarea></label><div class="conversion-preview"><span>Equivalente estimado</span><strong id="conversion-total">$0.00 USD</strong></div><div class="dialog-actions"><button class="button secondary" value="cancel">Cancelar</button><button class="button primary" id="save-expense" value="default">Guardar gasto</button></div></div></form></dialog><div id="toast" class="toast" role="status"></div><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="app.js?v=2"></script></body></html>
