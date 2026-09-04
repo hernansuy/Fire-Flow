@@ -126,4 +126,6 @@ Los campos por debajo del umbral deben quedar resaltados y nunca confirmarse aut
 
 ## Decisión actual
 
-Se conserva `fire-flow.html` como opción mínima y portable. La primera mejora inteligente será probar PaddleOCR.js con comprobantes reales. Si el rendimiento o el tamaño resultan excesivos, se documentará el salto a un modo local Python con invoice2data, sin eliminar la versión HTML.
+Se elige PaddleOCR.js para la web publicada. La app pasa de HTML estático puro a JavaScript empaquetado con Vite, pero sigue sin React y conserva `fire-flow.html` como opción mínima y portable. PaddleOCR.js se ejecuta en Worker y PP-OCRv5 devuelve texto, posiciones y confianza para que el parser sugiera comercio y total. En esta primera integración el módulo y sus modelos se cargan desde la web; la imagen sigue procesándose localmente en el navegador.
+
+invoice2data queda como alternativa avanzada para una futura versión local Python con plantillas por comercio. No se incorpora al despliegue de GitHub Pages porque necesita un proceso Python o backend.
