@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig({ base: './',
   plugins: [{
     name: 'inject-paddleocr-module',
     transformIndexHtml(html) {
