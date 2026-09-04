@@ -22,6 +22,11 @@ La aplicación trabaja con monedas de México y Sudamérica, permite editar el t
 - Tipo de cambio editable y conversión a USD.
 - Exportación mensual a Excel `.xls` formateado.
 - Versión portable en un único archivo HTML.
+- Estrategia documentada para OCR con PaddleOCR y invoice2data.
+
+## Reconocimiento de facturas
+
+Las alternativas técnicas y la decisión de conservar una versión mínima en HTML están documentadas en [docs/ocr-options.md](./docs/ocr-options.md).
 
 ## Uso
 
