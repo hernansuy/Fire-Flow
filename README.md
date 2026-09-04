@@ -25,6 +25,10 @@ La aplicación trabaja con monedas de México y Sudamérica, permite editar el t
 
 ## Uso
 
+### Demo online
+
+La versión publicada está disponible en [https://hernansuy.github.io/Fire-Flow/](https://hernansuy.github.io/Fire-Flow/).
+
 ### Versión portable
 
 Abre [fire-flow.html](./fire-flow.html) directamente en el navegador. Esta versión contiene la interfaz, estilos y lógica en un único archivo, por lo que es adecuada para compartirla completa.
